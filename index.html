@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project: Library | Javascript course</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./src/output.css">
+
+</head>
+<body>
+  <div class="min-h-dvh flex flex-col p-6 md:p-12 lg:p-20 bg-surface">
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto w-full mb-16 md:mb-24 pt-4 md:pt-8 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-8">
+      <div>
+        <h1 class="mb-4">My Library</h1>
+        <p class="text-muted text-base md:text-lg max-w-[45ch]">Track and manage your book collection — I don't really read books, I'm to lazy :)</p>
+      </div>
+
+      <div class="text-sm text-muted tabular-nums tracking-wide uppercase">
+        <span id="stats-total">0</span> Volumes · <span id="stats-read">0</span> Read
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="max-w-6xl mx-auto w-full flex-1 pb-32">
+      <div id="empty-state"
+        class="hidden flex-col items-center justify-center text-center py-32 border border-border border-dashed rounded-sm">
+        <p class="font-serif text-3xl capitalize mb-3">Your shelf is empty</p>
+        <p class="text-muted max-w-sm">Begin your collection by adding a book below.</p>
+      </div>
+      
+      <div id="book-grid" 
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-y-14">
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="fixed bottom-0 left-0 right-0 p-6 border-t border-border flex justify-center z-40 bg-surface/60 backdrop-blur-md">
+      <button id="open-add"
+        class="btn-primary gap-3 bg-primary text-primary-foreground hover:bg-foreground active:scale-[0.98]"
+        style="box-shadow: 0 10px 30px hsl(245 85% 60% / 0.18)">
+        <span class="font-serif text-xl leading-none mb-0.5">+</span>
+        <span class="text-sm tracking-widest uppercase font-medium">new book</span>
+      </button>
+    </footer>
+  </div>
+
+  <!-- Add Book Dialog -->
+  <div id="add-dialog"
+    class="hidden fixed inset-0 z-50 items-center justify-center p-4 backdrop">
+    <div class="bg-surface border border-border rounded-sm w-full max-w-md p-6 animate-scale-in">
+      <h2>New Volume</h2>
+      <p class="text-muted text-sm mt-1">Add a book to your shelf.</p>
+      <form id="add-form" class="space-y-5 mt-5">
+        <div class="space-y-2">
+          <label for="f-title" class="form-label">Title</label>
+          <input id="f-title" required class="form-input" />
+        </div>
+        <div class="space-y-2">
+          <label for="f-author" class="form-label">Author</label>
+          <input id="f-author" required class="form-input" />
+        </div>
+        <div class="space-y-2">
+          <label for="f-pages" class="form-label">Pages</label>
+          <input id="f-pages" type="number" min="0" class="form-input" />
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t border-border">
+          <label for="f-read" class="form-label">Already read</label>
+          <button type="button" id="f-read" role="switch" aria-checked="false"
+            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors" style="background: hsl(245, 20%, 82%);">
+            <span class="sr-only">Toggle read</span>
+            <span class="thumb inline-block h-5 w-5 transform rounded-full bg-background shadow transition-transform translate-x-0.5"></span>
+          </button>
+        </div>
+
+        <div class="flex gap-3 pt-2">
+          <button type="button" id="cancel-add" 
+            class="flex-1 text-sm tracking-widest uppercase font-medium py-3 rounded-sm border border-border hover:border-primary hover:text-primary transition-colors">
+            Cancel
+          </button>
+          <button type="submit" 
+            class="flex-1 bg-primary text-primary-foreground text-sm tracking-widest uppercase font-medium py-3 rounded-sm hover:bg-foreground transition-colors">
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Details Dialog -->
+  <div id="details-dialog" 
+    class="flex fixed inset-0 z-50 items-center justify-center p-4 backdrop">
+    <div class="bg-surface border border-border rounded-sm w-full max-w-md p-6 animate-scale-in relative">
+      <button id="close-details"
+        class="absolute top-3 right-3 text-muted hover:text-primary p-1" aria-label="Close">
+        ✕
+      </button>
+      <p class="text-xs uppercase tracking-widest text-muted mb-2">Volume Detail</p>
+      <h2 id="d-title" class="font-serif text-4xl leading-tight"></h2>
+      <p id="d-author" class="text-muted italic mt-3"></p>
+      <div class="grid grid-cols-2 gap-4 pt-4 mt-4 border-t border-border">
+        <div>
+          <p class="text-[10px] uppercase tracking-widest text-muted mb-1">Pages</p>
+          <p id="d-pages" class="font-serif text-2xl tabular-nums"></p>
+        </div>
+        <div>
+          <p class="text-[10px] uppercase tracking-widest text-muted mb-1">Status</p>
+          <p id="d-status" class="font-serif text-2xl"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-background: hsl(220 15% 97%);
+  --color-surface: hsl(220 12% 93%);
+  --color-border: hsl(220 10% 85%);
+  --color-foreground: hsl(220 20% 18%);
+  --color-muted: hsl(220 10% 45%);
+  --color-primary: hsl(245 85% 60%);
+  --color-primary-foreground: hsl(220 15% 97%);
+
+  /* Fonts */
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+
+  /* Page defaults */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-dvh antialiased font-sans;
+  }
+
+  /* Typography system */
+  h1, h2, h3, h4 {
+    @apply font-serif tracking-tight;
+  }
+
+  h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  /* Links */
+  a {
+    @apply text-primary no-underline transition;
+  }
+
+  a:hover {
+    @apply opacity-80;
+  }
+
+  /* Buttons reset */
+  button {
+    @apply cursor-pointer font-medium;
+  }
+
+  /* Inputs reset */
+  input, textarea, select {
+    @apply outline-none;
+  }
+}
+
+
+@layer components {
+  .card {
+    @apply rounded-xl p-6 shadow-sm border;
+  }
+  
+  .btn-primary {
+    @apply p-8 py-3.5 flex items-center rounded-md transition-all duration-300;
+  }
+
+  .form-label {
+    @apply text-xs uppercase tracking-widest text-muted;
+  }
+
+  .form-input::placeholder {
+    color: hsl(220 10% 50%);
+  }
+
+  .form-input {
+    @apply w-full h-10 px-3 rounded-sm bg-background border border-border;
+  }
+
+  .form-input:focus {
+    @apply outline-none border-primary;
+  }
+}
+
+
+@layer utilities {
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scale-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s ease-out both;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.2s ease-out both;
+  }
+
+  .backdrop {
+    background: hsl(220 20% 10% / 0.4);
+    backdrop-filter: blur(2px);
+  }
+}

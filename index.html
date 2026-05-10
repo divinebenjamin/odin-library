@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project: Library | Javascript course</title>
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="./src/output.css">
 
 </head>
@@ -40,7 +42,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="fixed bottom-0 left-0 right-0 p-6 border-t border-border flex justify-center z-40 bg-surface/60 backdrop-blur-md">
+    <footer class="fixed bottom-0 left-0 right-0 p-6 border-t border-border flex justify-center z-40 bg-surface/60 backdrop-blur-sm">
       <button id="open-add"
         class="btn-primary gap-3 bg-primary text-primary-foreground hover:bg-foreground active:scale-[0.98]"
         style="box-shadow: 0 10px 30px hsl(245 85% 60% / 0.18)">
@@ -93,31 +95,10 @@
     </div>
   </div>
 
-  <!-- Details Dialog -->
-  <div id="details-dialog" 
-    class="flex fixed inset-0 z-50 items-center justify-center p-4 backdrop">
-    <div class="bg-surface border border-border rounded-sm w-full max-w-md p-6 animate-scale-in relative">
-      <button id="close-details"
-        class="absolute top-3 right-3 text-muted hover:text-primary p-1" aria-label="Close">
-        ✕
-      </button>
-      <p class="text-xs uppercase tracking-widest text-muted mb-2">Volume Detail</p>
-      <h2 id="d-title" class="font-serif text-4xl leading-tight"></h2>
-      <p id="d-author" class="text-muted italic mt-3"></p>
-      <div class="grid grid-cols-2 gap-4 pt-4 mt-4 border-t border-border">
-        <div>
-          <p class="text-[10px] uppercase tracking-widest text-muted mb-1">Pages</p>
-          <p id="d-pages" class="font-serif text-2xl tabular-nums"></p>
-        </div>
-        <div>
-          <p class="text-[10px] uppercase tracking-widest text-muted mb-1">Status</p>
-          <p id="d-status" class="font-serif text-2xl"></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <!-- Scripts -->
   <script src="script.js"></script>
+
+  <!-- Icons -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

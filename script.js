@@ -22,7 +22,7 @@ function Book(title, author, pages, read = false) {
 
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
+  myLibrary.unshift(book);
 }
 
 // ----- Render -----
@@ -100,7 +100,43 @@ grid.addEventListener('click', (e) => {
 
 
 // ----- Add Book -----
+const addDialog = document.getElementById('add-dialog');
+const addForm = document.getElementById('add-form');
+const readToggle = document.getElementById('f-read');
+let readState = false
 
+function setReadToggle(v) {
+  readState = v;
+  readToggle.setAttribute('aria-checked', String(v));
+  readToggle.style.background = v ? 'hsl(245 85% 60%)' : 'hsl(245, 20%, 82%)';
+  readToggle.querySelector('.thumb').style.transform = v ? 'translateX(18px)' : 'translateX(2px)';
+}
+readToggle.addEventListener('click', () => setReadToggle(!readState));
 
+function openAdd() {
+  addForm.reset();
+  setReadToggle(false);
+  addDialog.classList.remove('hidden');
+  addDialog.classList.add('flex');
+  setTimeout(() => document.getElementById('f-title').focus(), 50);
+}
+
+function closeAdd() {
+  addDialog.classList.add('hidden');
+  addDialog.classList.remove('flex');
+}
+document.getElementById('open-add').addEventListener('click', openAdd);
+document.getElementById('cancel-add').addEventListener('click', closeAdd);
+addDialog.addEventListener('click', (e) => { if (e.target === addDialog) closeAdd(); });
+
+addForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const title = document.getElementById('f-title').value.trim();
+  const author = document.getElementById('f-author').value.trim();
+  const pages = parseInt(document.getElementById('f-pages').value, 10) || 0;
+  if (!title || !author) return;
+  addBookToLibrary(title, author, pages, readState)
+  render(); closeAdd();
+});
 
 render();

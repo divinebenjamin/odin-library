@@ -78,6 +78,12 @@ function render() {
 }
 
 
+// ----- Read toggle prootype -----
+Book.prototype.toggleRead = function() {
+  this.read = !this.read;
+}
+
+
 // ----- Events: grid (delegated) -----
 grid.addEventListener('click', (e) => {
   const btn = e.target.closest('button[data-action]');
@@ -93,7 +99,7 @@ grid.addEventListener('click', (e) => {
     myLibrary = myLibrary.filter(book => book.id !== id);
     render();
   } else if (action === 'toggle') {
-    book.read = !book.read;
+    book.toggleRead()
     render();
   }
 });       

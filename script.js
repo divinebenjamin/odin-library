@@ -1,11 +1,4 @@
-myLibrary = [
-  { id: '1', title: 'The Architecture of Silence', author: 'Elias Vance', pages: 312, read: true },
-  { id: '2', title: 'Notes on a Waning Season', author: 'Clara Hemlock', pages: 184, read: false },
-  { id: '3', title: "A Dictionary of Forgotten Winds", author: 'Julian Thorne', pages: 450, read: false },
-  { id: '4', title: "The Cartographer's Daughter", author: 'Mira Solenne', pages: 278, read: true },
-  { id: '5', title: 'Letters to a Distant Lighthouse', author: 'Owen Marchetti', pages: 196, read: true },
-  { id: '6', title: 'Of Quiet Rooms and Loud Hearts', author: 'Sasha Wren', pages: 224, read: false },
-];
+myLibrary = [];
 
 
 function Book(title, author, pages, read = false) {
@@ -25,7 +18,7 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.unshift(book);
 }
 
-// ----- Render -----
+// ----- Render -----s
 const statsTotal = document.getElementById('stats-total');
 const statsRead = document.getElementById('stats-read');
 const empty = document.getElementById('empty-state');

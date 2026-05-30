@@ -18,7 +18,7 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.unshift(book);
 }
 
-// ----- Render -----s
+// ----- Render -----
 const statsTotal = document.getElementById('stats-total');
 const statsRead = document.getElementById('stats-read');
 const empty = document.getElementById('empty-state');
